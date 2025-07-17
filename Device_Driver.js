@@ -28,15 +28,14 @@ function device_type_model(driverName, deviceIP, devicePort, deviceDebug) {
     DEV.Send(pollCommands[pollCounter]);
 
     if (deviceAnswerCounter > 0) {
-     deviceAnswerCounter -= 1;
+      deviceAnswerCounter -= 1;
     } else {
       deviceAnswerCounter = 0;
       executeOfflineCommands();
-      DEV.SetFeedback("logic_status_fb", 0);
     }
   }
 
-  devicePoll = IR.SetInterval(1e3 * (3 + 0.5 * Math.random()), makeDevicePoll());
+  devicePoll = IR.SetInterval(1e3 * (3 + 0.5 * Math.random()), makeDevicePoll);
 
 
   // Функции драйвера для управления устройством
@@ -94,7 +93,7 @@ function device_type_model(driverName, deviceIP, devicePort, deviceDebug) {
     // Обновляем счётчик, так как получили ответ от устройства
     deviceAnswerCounter = 5;
     executeOnlineCommands();
-    DEV.SetFeedback("logic_online_fb", 1);
+    DEV.SetFeedback("logic_status_fb", 1);
 
     rxData += textResponse;
 
